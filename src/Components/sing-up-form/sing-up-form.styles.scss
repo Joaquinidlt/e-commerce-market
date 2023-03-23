@@ -1,0 +1,28 @@
+.sign-up-container {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    margin-top: 24px;
+    h2 {
+      margin: 10px 0;
+    }
+}
+
+@media (min-width:320px)  { 
+    
+}
+@media (min-width:480px)  { /* smartphones, Android phones, landscape iPhone */ }
+@media (min-width:600px)  { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ }
+@media (min-width:801px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) {
+  .sign-up-container {
+    width: 380px;
+    margin-top: 0;
+  }
+}
+@media (min-width:1281px) { 
+  .sign-up-container {
+    width: 380px;
+    margin-top: 0;
+  }
+}
