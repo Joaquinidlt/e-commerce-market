@@ -1,31 +1,20 @@
 import { useContext, useState } from 'react';
 import './product-card-saved.styles.scss';
-import { BsShop, BsThreeDotsVertical, BsChevronDown, BsChevronUp, BsHeartFill, BsHeart } from 'react-icons/bs'
+import { BsShop, BsChevronDown, BsChevronUp, BsHeartFill, BsHeart } from 'react-icons/bs'
 import { MdAddShoppingCart, MdInfo } from 'react-icons/md'
 import { CartContext } from '../../contexts/cart.context';
 import { SavedContext } from '../../contexts/saved.context';
 
 const  ProductCardSaved = ({ product }) => {
   const { name, price, imageUrl } = product;
-  const { cartItems, addItemToCart } = useContext(CartContext);
-  const { savedItems, addItemToSaved, clearItemFromSaved } = useContext(SavedContext);
+  const { addItemToCart } = useContext(CartContext);
+  const { savedItems, clearItemFromSaved } = useContext(SavedContext);
   
-
   const [ infoExtend, setInfoExtend ] = useState(false);
-  const [ heartState, setHeartState ] = useState(false);
 
   const addProductToCart = () => addItemToCart(product);
-  const addProductToSaved = () => addItemToSaved(product);
   const clearProductFromSaved = () => clearItemFromSaved(product);
 
-  const handleHeartStateTrue = () => {
-    addProductToSaved()
-    setHeartState(true)
-  }
-  const handleHeartStateFalse = () => {
-    clearProductFromSaved()
-    setHeartState(false)
-  }
   const openMoreInfo = () => {
     setInfoExtend(!infoExtend)
   }
@@ -39,14 +28,14 @@ const  ProductCardSaved = ({ product }) => {
           <div className='name-card'>{name}</div>
           <div className='price-card'>${price}</div>        
         </div>
-        {heartState ? 
-          <div className='third-div' onClick={handleHeartStateFalse}>
-            <BsHeart size={23} color='#a81d35'/>
-          </div>
-        :
+        {savedItems.find((el) => el.name === name) ? 
           <div className='third-div' onClick={clearProductFromSaved}>
             <BsHeartFill size={23} color='#a81d35'/>
           </div>
+        :
+          <div className='third-div'>
+            <BsHeart size={23} color='#a81d35'/>
+          </div>          
         }
       </div>
       

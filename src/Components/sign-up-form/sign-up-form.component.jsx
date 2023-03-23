@@ -8,8 +8,8 @@ import {
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase.utils';
 
-import './sing-up-form.styles.scss';
 import CustomizedSnackbars from '../snack-bar/snack-bar.component';
+import { SignUpContainer } from './sign-up-form.styles.jsx';
 
 const defaultFormFields = {
   displayName: '',
@@ -68,7 +68,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className='sign-up-container'>
+    <SignUpContainer>
       { textState === "success" && showCreated && <CustomizedSnackbars state={"success"} message={"Account successfully created!"} stateSnack={stateSnack} setStateSnack={setStateSnack}/>}
       { textState === "error" && mailUsed && <CustomizedSnackbars state={"error"} message={"Cannot create user, email already in use!"} stateSnack={stateSnack} setStateSnack={setStateSnack}/>}
       
@@ -112,7 +112,7 @@ const SignUpForm = () => {
         />
         <Button type='submit'>Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 
