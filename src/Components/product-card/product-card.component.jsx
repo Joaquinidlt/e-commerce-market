@@ -1,20 +1,22 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import './product-card.styles.scss';
 import { BsShop, BsChevronDown, BsChevronUp, BsHeartFill, BsHeart } from 'react-icons/bs'
 import { MdAddShoppingCart, MdInfo } from 'react-icons/md'
-import { CartContext } from '../../contexts/cart.context';
-import { SavedContext } from '../../contexts/saved.context';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart.selector';
+import { addItemToCart } from '../../store/cart/cart.action';
+/* import { SavedContext } from '../../contexts/saved.context'; */
 
 const  ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
-  const { addItemToCart } = useContext(CartContext);
-  const { savedItems, addItemToSaved, clearItemFromSaved } = useContext(SavedContext);
+  const cartItems = useSelector(selectCartItems);
+  /* const { savedItems, addItemToSaved, clearItemFromSaved } = useSelector(SavedContext); */
   
   const [ infoExtend, setInfoExtend ] = useState(false);
 
-  const addProductToCart = () => addItemToCart(product);
-  const addProductToSaved = () => addItemToSaved(product);
-  const clearProductFromSaved = () => clearItemFromSaved(product);
+  const addProductToCart = () => addItemToCart(cartItems, product);
+  /* const addProductToSaved = () => addItemToSaved(product);
+  const clearProductFromSaved = () => clearItemFromSaved(product); */
 
   const openMoreInfo = () => {
     setInfoExtend(!infoExtend)
@@ -29,15 +31,18 @@ const  ProductCard = ({ product }) => {
           <div className='name-card'>{name}</div>
           <div className='price-card'>${price}</div>        
         </div>
-        {savedItems.find((el) => el.name === name) ? 
+          <div className='third-div'>
+            <BsHeartFill size={23} color='#a81d35'/>
+          </div>
+         {/*savedItems.find((el) => el.name === name) ? 
           <div className='third-div' onClick={clearProductFromSaved}>
             <BsHeartFill size={23} color='#a81d35'/>
           </div>
         :
           <div className='third-div' onClick={addProductToSaved}>
             <BsHeart size={23} color='#a81d35'/>
-          </div>
-        }
+          </div>*/
+        } 
       </div>
       
       <div className='center-section'>

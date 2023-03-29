@@ -1,4 +1,17 @@
-import { useContext, useState } from 'react';
+import './product-card-saved.styles.scss';
+
+
+const  ProductCardSaved = ({ product }) => {
+
+  return (
+    <div className='card-saved-container'>
+        Saved
+    </div>
+  );
+}
+
+export default ProductCardSaved;
+/* import { useContext, useState } from 'react';
 import './product-card-saved.styles.scss';
 import { BsShop, BsChevronDown, BsChevronUp, BsHeartFill, BsHeart } from 'react-icons/bs'
 import { MdAddShoppingCart, MdInfo } from 'react-icons/md'
@@ -70,4 +83,4 @@ const  ProductCardSaved = ({ product }) => {
   );
 }
 
-export default ProductCardSaved;
+export default ProductCardSaved; */
