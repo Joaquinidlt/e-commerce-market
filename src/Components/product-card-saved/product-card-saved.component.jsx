@@ -1,32 +1,21 @@
-import './product-card-saved.styles.scss';
-
-
-const  ProductCardSaved = ({ product }) => {
-
-  return (
-    <div className='card-saved-container'>
-        Saved
-    </div>
-  );
-}
-
-export default ProductCardSaved;
-/* import { useContext, useState } from 'react';
+import { useState } from 'react';
 import './product-card-saved.styles.scss';
 import { BsShop, BsChevronDown, BsChevronUp, BsHeartFill, BsHeart } from 'react-icons/bs'
 import { MdAddShoppingCart, MdInfo } from 'react-icons/md'
-import { CartContext } from '../../contexts/cart.context';
-import { SavedContext } from '../../contexts/saved.context';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSavedItems } from '../../store/saved/saved.selector';
+import { addItemToCart } from '../../store/cart/cart.reducer';
+import { clearItemFromSaved } from '../../store/saved/saved.reducer';
 
 const  ProductCardSaved = ({ product }) => {
   const { name, price, imageUrl } = product;
-  const { addItemToCart } = useContext(CartContext);
-  const { savedItems, clearItemFromSaved } = useContext(SavedContext);
+  const dispatch = useDispatch();
+  const savedItems = useSelector(selectSavedItems);
   
   const [ infoExtend, setInfoExtend ] = useState(false);
 
-  const addProductToCart = () => addItemToCart(product);
-  const clearProductFromSaved = () => clearItemFromSaved(product);
+  const addProductToCart = () => dispatch(addItemToCart(product));
+  const clearProductFromSaved = () => dispatch(clearItemFromSaved(product));
 
   const openMoreInfo = () => {
     setInfoExtend(!infoExtend)
@@ -77,10 +66,9 @@ const  ProductCardSaved = ({ product }) => {
             <BsChevronDown size={23} />
           </div>
         }
-
       </div>
     </div>
   );
 }
 
-export default ProductCardSaved; */
+export default ProductCardSaved;

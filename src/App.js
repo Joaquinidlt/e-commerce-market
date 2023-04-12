@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
 import { createUserDocumentFromAuth, onAuthStateChangedListener } from './utils/firebase/firebase.utils.js';
-import { setCurrentUser } from './store/user/user.action'
+import { setCurrentUser } from './store/user/user.reducer'
 import Home from './routes/home/home.component.jsx';
 import Navigation from './routes/navigation/navigation.component.jsx';
 import Authentication from './routes/authentication/authentication.component';
@@ -37,7 +37,6 @@ const  App = () => {
         <Route path='checkout' element={<Checkout />} />
         <Route path='saved' element={<Saved />} />
       </Route>
-
     </Routes>
   );
 }

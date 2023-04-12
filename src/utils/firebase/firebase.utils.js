@@ -1,24 +1,24 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, 
-        signInWithRedirect, 
-        signInWithPopup, 
-        GoogleAuthProvider, 
-        createUserWithEmailAndPassword, 
-        signInWithEmailAndPassword, 
-        signOut,
-        onAuthStateChanged
-      } from 'firebase/auth';
-
-import { getFirestore, 
-        doc, 
-        getDoc, 
-        setDoc, 
-        collection, 
-        writeBatch,
-        query,
-        getDocs
-       } from 'firebase/firestore';
-
+import {
+  getAuth,
+  signInWithRedirect,
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAst6pvvtSEpTyqBgAAIOr5C5B1aP2fAX4",
@@ -37,13 +37,19 @@ googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
 
-export const auth = getAuth(firebaseApp);
-export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
+export const auth = getAuth();
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd,
+  field
+) => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
 
@@ -53,25 +59,26 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   });
 
   await batch.commit();
-  console.log('done')
-}
+  console.log('done');
+};
+
 export const getCategoriesAndDocuments = async () => {
+  console.log('getCategoriesAndDocuments')
   const collectionRef = collection(db, 'Categories');
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+};
 
-  return categoryMap;
-}
-export const createUserDocumentFromAuth = async ( userAuth, additionalInformation = {} ) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
   if (!userAuth) return;
 
   const userDocRef = doc(db, 'users', userAuth.uid);
+
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
@@ -107,4 +114,5 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);

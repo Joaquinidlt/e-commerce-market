@@ -1,9 +1,10 @@
 import { useState, Fragment, useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 import { selectCurrentUser } from '../../store/user/user.selector';
-import { selectIsCartOpen } from '../../store/cart/cart.selector';
+import { selectCartCount, selectIsCartOpen } from '../../store/cart/cart.selector';
+import { setIsCartOpen } from '../../store/cart/cart.reducer';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 import CartDropDownList from '../../Components/cart-dropdown/cart-dropdown.component';
 
@@ -25,19 +26,19 @@ import { BsShop, BsHeartFill } from 'react-icons/bs';
 
 
 const  Navigation = () => {
-    const currentUser = useSelector(selectCurrentUser)
-    const { isCartOpen, setIsCartOpen, cartCount } = useContext(selectIsCartOpen);
-
+    const dispatch = useDispatch();
+    const currentUser = useSelector(selectCurrentUser);
+    const isCartOpen = useSelector(selectIsCartOpen);
+    const cartCount = useSelector(selectCartCount);
+ 
+    const toggleIsCartOpen = () => dispatch(setIsCartOpen(!isCartOpen));
     const [ profileState, setProfileState ] = useState(false);
 
     const openProfileMenu = () => {
         setProfileState(!profileState);
-        setIsCartOpen(false);
+        dispatch(setIsCartOpen(false));
     }
-    const openCartList = () => {
-        setIsCartOpen(!isCartOpen);
-        setProfileState(false);
-    }
+
     return (
         <Fragment>
             <NavigationContainer>
@@ -45,7 +46,7 @@ const  Navigation = () => {
                     E-Market
                 </LogoContainer>
                 <RightSubContainer>
-                    <CartIcon onClick={openCartList}>
+                    <CartIcon onClick={toggleIsCartOpen}>
                         <HiShoppingCart size={25}/>
                     </CartIcon>
                     <CartCountContainer>{cartCount}</CartCountContainer>
