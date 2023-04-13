@@ -4,7 +4,7 @@ import { BsShop, BsChevronDown, BsChevronUp, BsHeartFill, BsHeart } from 'react-
 import { MdAddShoppingCart, MdInfo } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSavedItems } from '../../store/saved/saved.selector';
-import { addItemToCart } from '../../store/cart/cart.reducer';
+import { addItemToCart } from '../../store/cart/cart.action.js';
 import { clearItemFromSaved } from '../../store/saved/saved.reducer';
 
 const  ProductCardSaved = ({ product }) => {

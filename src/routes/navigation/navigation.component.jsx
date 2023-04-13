@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 import { selectCurrentUser } from '../../store/user/user.selector';
 import { selectCartCount, selectIsCartOpen } from '../../store/cart/cart.selector';
-import { setIsCartOpen } from '../../store/cart/cart.reducer';
+import { setIsCartOpen } from '../../store/cart/cart.action.js';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 import CartDropDownList from '../../Components/cart-dropdown/cart-dropdown.component';
 

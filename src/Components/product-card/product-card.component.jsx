@@ -3,18 +3,20 @@ import './product-card.styles.scss';
 import { BsShop, BsChevronDown, BsChevronUp, BsHeartFill, BsHeart } from 'react-icons/bs'
 import { MdAddShoppingCart, MdInfo } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart } from '../../store/cart/cart.reducer';
+import { addItemToCart } from '../../store/cart/cart.action.js';
 import { addItemToSaved, clearItemFromSaved } from '../../store/saved/saved.reducer';
 import { selectSavedItems } from '../../store/saved/saved.selector';
+import { selectCartItems } from '../../store/cart/cart.selector';
 
 const  ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
   const dispatch = useDispatch();
   const [ infoExtend, setInfoExtend ] = useState(false);
 
+  const cartItems = useSelector(selectCartItems);
   const savedItems = useSelector(selectSavedItems);
 
-  const addProductToCart = () => dispatch(addItemToCart(product));
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
   const addProductToSaved = () => dispatch(addItemToSaved(product));
   const clearProductFromSaved = () => dispatch(clearItemFromSaved(product));
 
