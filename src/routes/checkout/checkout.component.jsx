@@ -6,7 +6,7 @@ import {
   selectCartTotal,
 } from '../../store/cart/cart.selector';
 import './checkout.styles.scss';
-import Button from '../../Components/button/button.component';
+import PaymentForm from '../../Components/payment-form/payment-form.component';
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
@@ -36,7 +36,7 @@ const Checkout = () => {
       ))}
       <div className='box-pay'>
         <div className='total'>TOTAL: ${cartTotal}</div>
-        <Button>PAY</Button>
+        <PaymentForm/>
       </div>
     </div>
   );
