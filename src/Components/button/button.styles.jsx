@@ -18,6 +18,7 @@ export const BaseButton = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
+  align-items: center;
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
   &:hover {
     background-color: white;
@@ -56,6 +57,26 @@ export const InvertedButton = styled(BaseButton)`
     background-color: #a01c32;
     color: white;
     border: none;
+  }
+`;
+export const ButtonSpinner = styled.div`
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(195, 195, 195, 0.6);
+  border-radius: 50%;
+  border-top-color: #636767;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
   }
 `;
 
