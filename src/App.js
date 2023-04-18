@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
-import Home from './routes/home/home.component.jsx';
-import Navigation from './routes/navigation/navigation.component.jsx';
+import Home from './routes/home/home.component.tsx';
+import Navigation from './routes/navigation/navigation.component.tsx';
 import Authentication from './routes/authentication/authentication.component';
 import Checkout from './routes/checkout/checkout.component';
-import Saved from './routes/saved/saved.component.jsx';
+import Saved from './routes/saved/saved.component.tsx';
 import Shop from './routes/shop/shop.component';
 import { checkUserSession } from './store/user/user.action';
 
@@ -17,7 +17,7 @@ const  App = () => {
 
   useEffect(() => {
     dispatch(checkUserSession());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>
