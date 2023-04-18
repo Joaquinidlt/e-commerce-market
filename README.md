@@ -1,3 +1,23 @@
+### Project built with:
+
+### -React
+
+### -Typescript
+
+### -Redux
+
+### -Styled Components
+
+### -Persistance + Session Storage
+
+### -Firebase
+
+### -Stripe
+
+### -Netlify
+
+### -Testing con Jest
+
 ### `npm start`
 
 ### `npm test`
